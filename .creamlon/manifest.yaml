@@ -1,0 +1,44 @@
+version: "1"
+name: creamlon-x402-report-node
+description: Creamlon v0.8.1 x402 paid private PDF report node using bundled layout.
+identity:
+  type: ed25519
+  public_key: "myapOjNpDj_3b-_pwmBWUeP2awpFXn0LTnchYXY_ReE"
+status: available
+capabilities:
+  - id: x402-analysis-report
+    description: Generate a private PDF analysis report from a markdown brief after x402 payment
+    input:
+      media_types:
+        - text/markdown
+    output:
+      media_types:
+        - application/pdf
+    access:
+      mode: credential
+      units: 1
+profiles:
+  github:
+    transport: issues
+  credential:
+    scheme: voucher-hmac-v1
+    instructions: Pay with x402 to receive a one-time private report credential.
+extensions:
+  payment:
+    pattern: payment-bridge-v1
+    instructions: Pay with x402 to receive a one-time Creamlon credential.
+    providers:
+      - id: x402
+        capability_id: x402-analysis-report
+        resource_url: http://localhost:4020/buy/x402-analysis-report
+        network: base
+        asset: USDC
+        price: "0.50"
+        amount: "500000"
+        pay_to: "0x1111111111111111111111111111111111111111"
+        facilitator: http://localhost:4021
+  delivery:
+    scheme: hpke-x25519-hkdf-sha256-aes256gcm-v2
+    receive_public_key: "MCowBQYDK2VuAyEAR1nywT92qdcwc93Bj3YTJppJaqllUqYPgwddWds0w2U"
+    transports:
+      - github-private-repo
