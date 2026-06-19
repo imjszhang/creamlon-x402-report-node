@@ -1,5 +1,9 @@
 {
+  "version": "1",
+  "status": "available",
+  "checked_at": "2026-06-19T10:52:32.030Z",
   "proofs_valid": true,
-  "proof_count": 0,
-  "redemption_count": 0
+  "capability_count": 1,
+  "proof_count": 1,
+  "last_delivery_at": "2026-06-19T10:52:29.373Z"
 }
